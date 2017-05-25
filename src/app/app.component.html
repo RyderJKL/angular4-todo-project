@@ -1,3 +1,32 @@
-<h1>
-  {{title}}
-</h1>
+<mdl-layout
+  #mdlLayput="mdlLayout"
+  mdl-layout-fixed-header>
+  <mdl-layout-header>
+    <mdl-layout-header-row>
+      <mdl-layout-title>Title</mdl-layout-title>
+      <mdl-layout-spacer></mdl-layout-spacer>
+      <!--mdl-layout-spacer 自动占据剩余空间-->
+      <nav class="mdl-navigation">
+        <a
+          class="mdl-navigation__link">Todo</a>
+        <a (click)="login()"
+           class="mdl-navigation__link">Login</a>
+        <a class="mdl-navigation__link"
+           (click)="register()">
+          Register</a>
+      </nav>
+    </mdl-layout-header-row>
+  </mdl-layout-header>
+  <mdl-layout-drawer>
+    <mdl-layout-title>
+      Todos
+    </mdl-layout-title>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link">link
+      </a>
+    </nav>
+  </mdl-layout-drawer>
+  <mdl-layout-content>
+    <router-outlet></router-outlet>
+  </mdl-layout-content>
+</mdl-layout>
