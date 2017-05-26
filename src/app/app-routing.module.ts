@@ -7,8 +7,8 @@ import {Routes, RouterModule} from '@angular/router'
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'todo',
-    pathMatch: 'full',
+    redirectTo: 'login',
+    pathMatch: 'full'
   }
 ];
 

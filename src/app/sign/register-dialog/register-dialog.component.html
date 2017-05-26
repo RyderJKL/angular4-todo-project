@@ -1,7 +1,10 @@
-<form [formGroup]="registerFrom" novalidate>
+
+<div>
+  <form [formGroup]="registerForm">
   <h3 class="mdl-dialog__title">
     Register
   </h3>
+
   <div class="mdl-dialog__content">
     <mdl-textfield
       #firstElement
@@ -16,7 +19,7 @@
       <mdl-textfield
       type="password"
       label="Password"
-      formControllerName="password"
+      formControlName="password"
       floating-label
     ></mdl-textfield>
       <br>
@@ -39,7 +42,8 @@
     <button type="button" mdl-button
             (click)="register()" mdl-button-type="raised"
             mdl-colored="primary" mdl-ripple
-            [disabled]="registerFrom.invalid"
+            [disabled]="!registerForm.valid"
     >Register</button>
   </div>
 </form>
+</div>

@@ -1,9 +1,6 @@
 /**
  * Created by onejustone on 2017/5/25.
  */
-/**
- * Created by onejustone on 2017/5/25.
- */
 export interface Todo {
   id?: string;
   desc: string;
@@ -19,7 +16,8 @@ export interface User {
 
 export interface Auth {
   user?: User;
-  hasError: string;
+  hasError: boolean;
+  errMsg: string;
   redirectUrl?: string;
 }
 

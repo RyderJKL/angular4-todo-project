@@ -2,7 +2,8 @@ import {
   Component,
   ViewChild,
   HostListener,
-  OnInit } from '@angular/core';
+  OnInit
+} from '@angular/core';
 
 import {
   FormBuilder,
@@ -10,8 +11,13 @@ import {
   Validators,
 } from '@angular/forms'
 
-import { Subscription } from 'rxjs/Subscription'
-import {MdlTextFieldComponent, MdlDialogReference} from "@angular-mdl/core";
+import {Router} from '@angular/router'
+import {AuthService} from '../../core/auth.service'
+import {Subscription} from 'rxjs/Subscription'
+import {
+  MdlTextFieldComponent,
+  MdlDialogReference
+} from "@angular-mdl/core";
 
 @Component({
   selector: 'app-register-dialog',
@@ -19,19 +25,19 @@ import {MdlTextFieldComponent, MdlDialogReference} from "@angular-mdl/core";
   styleUrls: ['./register-dialog.component.css']
 })
 export class RegisterDialogComponent implements OnInit {
-  @ViewChild('firstElement') private inputElement : MdlTextFieldComponent;
+  @ViewChild('firstElement') private inputElement: MdlTextFieldComponent;
 
-  public registerFrom : FormGroup;
-  public processingRegister : boolean = true;
-  public subscription : Subscription;
-  public statusMessage : string = 'fsadfa';
+  public registerForm: FormGroup;
+  public processingRegister: boolean = false;
+  public subscription: Subscription;
+  public statusMessage: string = 'fsadfa';
 
-  constructor(
-    private fb: FormBuilder,
-    private dialog: MdlDialogReference
-  ) {
+  constructor(private fb: FormBuilder,
+              private authService: AuthService,
+              private router: Router,
+              private dialog: MdlDialogReference) {
     this.createForm();
-    this.dialog.onVisible().subscribe(() =>{
+    this.dialog.onVisible().subscribe(() => {
       this.inputElement.setFocus()
     })
   }
@@ -42,22 +48,33 @@ export class RegisterDialogComponent implements OnInit {
   }
 
   createForm() {
-    this.registerFrom = this.fb.group({
-     username: ['', Validators.required],
+    this.registerForm = this.fb.group({
+      username: ['', Validators.required],
       passwords: this.fb.group({
         password: [
           '',
-          Validators.required,
-          Validators.minLength(4),
-          Validators.maxLength(10)
+          Validators.required
         ],
         repeatPassword: ['', Validators.required]
       })
     })
   }
 
-  private register():void {
-    console.log('dsfd')
+  private register(): void {
+    this.processingRegister = true;
+    this.authService.register(
+      this.registerForm.get('username').value,
+      this.registerForm.get('passwords').get('password').value
+    )
+
+    this.processingRegister = false;
+    this.statusMessage = 'reigstering ...'
+    setTimeout(() => {
+      this.dialog.hide()
+      console.log('fuck')
+      // this.router.navigate(['todo']);
+    }, 500)
+
   }
 
   @HostListener('keydown.esc')
