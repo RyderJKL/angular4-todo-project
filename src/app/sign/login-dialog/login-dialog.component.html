@@ -1,0 +1,37 @@
+<div>
+  <form [formGroup]="loginForm">
+    <h3 class="mdl-dialog-title">Login</h3>
+    <div class="mdl-dialog__content">
+      <mdl-textfield
+        type="text"
+        label="Username"
+        formControlName="username"
+        floating-label
+      ></mdl-textfield>
+      <mdl-textfield
+        label="Password"
+        type="password"
+        formControlName="password"
+        floating-label
+      ></mdl-textfield>
+    </div>
+    <div class="status-bar">
+      <p
+        class="mdl-color-text--primary">{{loginForm.status|json
+        }}</p>
+      <mdl-spinner
+        [active]="processingLogin"></mdl-spinner>
+    </div>
+    <div class="mdl-dialog__actions">
+      <button type="button" mdl-button
+              (click)="login()"
+              mdl-button-type="raised"
+              mdl-colored="primary" mdl-ripple
+              [@loginState]="loginBtnState"
+              (mouseenter)="toggleLoginBtnState(true)"
+              (mouseleave)="toggleLoginBtnState(false)"
+      >Login</button>
+
+    </div>
+  </form>
+</div>
