@@ -35,19 +35,38 @@ export class AuthService {
   }
 
   unAuth(): void {
-    this.store$.dispatch({
+    return this.store$.dispatch({
       type: LOGOUT
     })
   }
 
-  register(username:string,password:string): void {
+  loginWithCredentials(username:string,password:string) {
+    this.userService.findUser(username).subscribe(user => {
+      if(user === null) {
+        this.store$.dispatch({type: LOGIN_FAILED_NOT_EXISTED});
+      } else if ( password !== user.password) {
+        this.store$.dispatch({type: LOGIN_FAILED_NOT_MATCH});
+      } else {
+        this.store$.dispatch({type:LOGIN,payload: {
+          user: user,
+          hasError: false,
+          errMsg: null,
+          loading: false,
+          redirectUrl: null
+        }});
+        this.router.navigate(['todo']);
+      }
+    })
+  };
+
+
+  register(username:string,password:string){
 
     let todoAddUser = {
       username: username,
       password: password,
-    }
+    };
 
-    console.log(todoAddUser)
     this.userService.findUser(username)
     .subscribe(user => {
       if(user !== null) {
@@ -58,8 +77,10 @@ export class AuthService {
             user: todoAddUser,
             hasError: false,
             errMsg: null,
+            loading: false,
             redirectUrl: null
-          }})
+          }});
+          this.router.navigate(['todo']);
         })
 
       }

@@ -32,8 +32,13 @@
     </div>
   </div>
 
-  <div class="status-bar">
-    <p class="mdl-color-text--primary">{{statusMessage}}</p>
+  <div class="status-bar" *ngIf="ifShowStatusBar">
+    <p class="mdl-color-text--primary">
+      {{statusMessage}}</p>
+    <!--<p class="mdl-color-text&#45;&#45;primary"-->
+       <!--*ngIf="(auth$|async).hasError">{{(auth$-->
+      <!--| async)?.errMsg-->
+      <!--}}</p>-->
     <mdl-spinner
       [active]="processingRegister"></mdl-spinner>
   </div>

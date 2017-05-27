@@ -17,6 +17,7 @@ export function  authReducer (state : Auth = {
   user: null,
   hasError: true,
   errMsg: null,
+  loading: false,
   redirectUrl: null
 }, action: Action) {
   switch (action.type) {
@@ -26,6 +27,7 @@ export function  authReducer (state : Auth = {
       return Object.assign({}, state, {
         user: null,
         hasError: true,
+        loading: false,
         errMsg: 'username existed',
         redirectUrl: null
       });

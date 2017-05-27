@@ -18,6 +18,7 @@ export interface Auth {
   user?: User;
   hasError: boolean;
   errMsg: string;
+  loading: boolean;
   redirectUrl?: string;
 }
 

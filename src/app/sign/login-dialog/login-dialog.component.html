@@ -1,12 +1,13 @@
-<div>
+<div
+  [ngStyle]="{'background-image':'url('+ photo +')'}">
   <form [formGroup]="loginForm">
     <h3 class="mdl-dialog-title">Login</h3>
     <div class="mdl-dialog__content">
       <mdl-textfield
+        #firstElement
         type="text"
         label="Username"
         formControlName="username"
-        floating-label
       ></mdl-textfield>
       <mdl-textfield
         label="Password"
@@ -17,8 +18,7 @@
     </div>
     <div class="status-bar">
       <p
-        class="mdl-color-text--primary">{{loginForm.status|json
-        }}</p>
+        class="mdl-color-text--primary"></p>
       <mdl-spinner
         [active]="processingLogin"></mdl-spinner>
     </div>
