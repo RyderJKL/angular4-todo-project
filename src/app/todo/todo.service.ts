@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import {Http,Headers,Response} from '@angular/http'
 
-import {Observable} from 'rxjs/Observable'
+import {Observable} from 'rxjs/Rx'
 import {Todo} from '../domain/entities'
 import {UUID} from 'angular2-uuid'
 import {Store} from '@ngrx/store'
@@ -38,9 +38,10 @@ export class TodoService {
         id: UUID.UUID,
         desc: desc,
         completed: false,
-        userId: this.userId
+        userId: userId
       }
-      return this.http.post(this.api_url,JSON.stringify(todoToAdd
+      return this.http
+        .post(this.api_url,JSON.stringify(todoToAdd
       ),{headers: this.headers})
       .map(res => res.json() as Todo)
     }).subscribe(todo => {
@@ -87,9 +88,9 @@ export class TodoService {
     .flatMap(todos => Observable.from(todos))
     .flatMap(todo => {
       const url = `${this.api_url}/${todo.id}`
-      let updateTodo = Object.assign({},todo,{completed: !todo.competed})
-      return this.http.patch(url,JSON.stringify({completed:!todo.comleted}),{
-        heades: this.headers
+      let updateTodo = Object.assign({},todo,{completed: !todo.completed})
+      return this.http.patch(url,JSON.stringify({completed:!todo.completed}),{
+        headers: this.headers
       })
     }).subscribe(() =>{
         this.store$.dispatch({
@@ -100,8 +101,8 @@ export class TodoService {
 
   clearCompleted():void {
     this.getTodos()
-    .flatMap(todos => Oberservable.from(todos))
-    .flatMat(todo => {
+    .flatMap(todos => Observable.from(todos.filter(t => t.completed)))
+    .flatMap(todo => {
       const  url = `${this.api_url}/${todo.id}`;
       return this.http.delete(url,{headers: this.headers})
     }).subscribe(() => {

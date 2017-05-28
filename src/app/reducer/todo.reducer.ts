@@ -48,7 +48,8 @@ export function todoReducer (state: Todo[] = [],action:Action) {
 }
 
 
-export function todoFilterReducer (state = (todo:Todo) => todo, action: Action) {
+export function todoFilterReducer (state = (todo:Todo) => todo,
+  action: Action) {
   // state 其实是不同条件下的测试函数
   switch (action.type) {
     case VisibilityFilters.SHOW_ALL:

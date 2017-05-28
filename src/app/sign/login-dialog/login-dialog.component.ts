@@ -21,6 +21,7 @@ import {AppState,Auth} from '../../domain/state'
 
 import {Observable} from 'rxjs/Observable'
 
+import 'rxjs/add/operator/filter'
 
 @Component({
   selector: 'app-login-dialog',
@@ -58,7 +59,7 @@ export class LoginDialogComponent implements OnDestroy{
     private bingService: BingBackGroundService,
     private store$: Store<AppState>
   ) {
-    this.auth$ = this.store$.select('auth');
+    this.auth$ = this.store$.select('auth')
     this.subscription = this.bingService.getImageUrl()
     .subscribe( (images: Image []) => {
       this.slides = [...images];
