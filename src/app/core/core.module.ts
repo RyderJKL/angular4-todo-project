@@ -12,13 +12,15 @@ import {AuthService} from './auth.service'
 import {UserService} from './user.service'
 // import {AuthGuardService} from './auth-guard.service'
 
+import {StoreDevtoolsModule} from '@ngrx/store-devtools'
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
     StoreModule.provideStore({
       auth: authReducer
-    })
+    }),
+    StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   providers: [
     AuthService,

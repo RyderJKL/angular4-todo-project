@@ -15,6 +15,13 @@ import {Image} from '../../domain/entities'
 import {BingBackGroundService} from '../bing-background.service'
 
 import {Subscription} from 'rxjs/Subscription'
+
+import {Store} from '@ngrx/store'
+import {AppState,Auth} from '../../domain/state'
+
+import {Observable} from 'rxjs/Observable'
+
+
 @Component({
   selector: 'app-login-dialog',
   templateUrl: './login-dialog.component.html',
@@ -42,13 +49,16 @@ export class LoginDialogComponent implements OnDestroy{
   public slides : Image [] = [];
   public photo = '';
   public subscription : Subscription;
-
+  private loading: boolean = false;
+  private auth$: Observable<Auth>;
   constructor(
     private fb: FormBuilder,
     private dialog: MdlDialogReference,
     private authService: AuthService,
-    private bingService: BingBackGroundService
+    private bingService: BingBackGroundService,
+    private store$: Store<AppState>
   ) {
+    this.auth$ = this.store$.select('auth');
     this.subscription = this.bingService.getImageUrl()
     .subscribe( (images: Image []) => {
       this.slides = [...images];
@@ -87,9 +97,13 @@ export class LoginDialogComponent implements OnDestroy{
   }
 
   private login() {
+    // this.auth$.map(auth => {
+    //   this.loading = auth.loading
+    // });
+    this.loading = true;
     let username : string = this.loginForm.get('username').value.trim();
     let password : string = this.loginForm.get('password').value.trim();
     this.authService.loginWithCredentials(username,password);
-    this.dialog.hide()
+    // this.dialog.hide()
   }
 }
