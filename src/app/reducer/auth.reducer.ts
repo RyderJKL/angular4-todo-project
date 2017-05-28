@@ -21,6 +21,8 @@ export function  authReducer (state : Auth = {
   redirectUrl: null
 }, action: Action) {
   switch (action.type) {
+    case LOGIN:
+      return Object.assign({}, action.payload,{hasError:false})
     case REGISTER:
       return Object.assign({}, action.payload)
     case REGISTER_FAILED_EXISTED:

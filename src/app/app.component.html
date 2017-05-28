@@ -8,12 +8,23 @@
       <!--mdl-layout-spacer 自动占据剩余空间-->
       <nav class="mdl-navigation">
         <a
-          class="mdl-navigation__link">Todo</a>
+          class="mdl-navigation__link"
+          *ngIf="!(auth$|async).hasError">Todo
+        </a>
+        <a class="mdl-navigation__link" *ngIf="!(auth$|async).hasError">{{(auth$ | async).user?.username}}</a>
         <a (click)="login()"
-           class="mdl-navigation__link">Login</a>
+           *ngIf="(auth$|async).hasError"
+           class="mdl-navigation__link"
+        >Login</a>
         <a class="mdl-navigation__link"
+           *ngIf="(auth$|async).hasError"
            (click)="register()">
           Register</a>
+        <a (click)="logout()"
+           mdl-navigation__link
+           class="mdl-navigation__link">
+          Logout
+        </a>
       </nav>
     </mdl-layout-header-row>
   </mdl-layout-header>

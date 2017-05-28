@@ -1,5 +1,13 @@
 import { Component } from '@angular/core';
 import { Router} from '@angular/router'
+import {Store} from '@ngrx/store'
+import {AppState,Auth} from './domain/state'
+import {Observable} from 'rxjs/Observable'
+
+import {
+  LOGOUT
+} from './actions/auth.action'
+
 import {MdlDialogService} from '@angular-mdl/core'
 import {LoginDialogComponent} from './sign/login-dialog/login-dialog.component'
 import {RegisterDialogComponent} from './sign/register-dialog/register-dialog.component'
@@ -12,11 +20,15 @@ import {RegisterDialogComponent} from './sign/register-dialog/register-dialog.co
 })
 export class AppComponent {
   title = 'app works!';
+  auth$: Observable<Auth>;
 
   constructor(
     private dialog: MdlDialogService,
+    private store$: Store<AppState>,
     private router: Router
-  ) {}
+  ) {
+    this.auth$ = this.store$.select('auth')
+  }
 
   login() {
     let lDialog = this.dialog.showCustomDialog({
@@ -37,5 +49,10 @@ export class AppComponent {
       enterTransitionDuration: 400,
       leaveTransitionDuration: 400
     })
+  }
+
+  logout() {
+    this.store$.dispatch({type:LOGOUT});
+    this.router.navigate(['login'])
   }
 }
