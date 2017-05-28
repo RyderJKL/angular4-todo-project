@@ -22,9 +22,30 @@ export function  authReducer (state : Auth = {
 }, action: Action) {
   switch (action.type) {
     case LOGIN:
-      return Object.assign({}, action.payload,{hasError:false})
+      return Object.assign({},action.payload,{loading:false,hasError:false});
+    case LOGIN_FAILED_NOT_EXISTED:
+      return Object.assign({},state,{
+        user:null,
+        hasError: true,
+        loading: false,
+        errMsg: 'Username not existed'
+      });
+    case LOGIN_FAILED_NOT_MATCH:
+      return Object.assign({},state,{
+        user: null,
+        hasError: true,
+        loading: false,
+        errMsg: 'Password not match'
+      });
+    case LOGOUT:
+      return Object.assign({}, state,{
+        user: null,
+        hasError: true,
+        errMsg: 'no credentials',
+        redirectUrl: '/'
+      })
     case REGISTER:
-      return Object.assign({}, action.payload)
+      return Object.assign({}, action.payload,{loading: false,hasError:false})
     case REGISTER_FAILED_EXISTED:
       return Object.assign({}, state, {
         user: null,

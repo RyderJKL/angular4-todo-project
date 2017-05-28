@@ -7,20 +7,20 @@ import {StoreModule} from '@ngrx/store'
  *
  */
 import { authReducer } from '../reducer/auth.reducer'
-import {todoReducer,todoFilterReducer} from '../reducer/todo.reducer'
+
 import {AuthService} from './auth.service'
 import {UserService} from './user.service'
 // import {AuthGuardService} from './auth-guard.service'
 
+import {StoreDevtoolsModule} from '@ngrx/store-devtools'
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
     StoreModule.provideStore({
-      auth: authReducer,
-      todos: todoReducer,
-      todoFilter: todoFilterReducer
-    })
+      auth: authReducer
+    }),
+    StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   providers: [
     AuthService,

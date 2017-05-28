@@ -17,10 +17,11 @@
       ></mdl-textfield>
     </div>
     <div class="status-bar">
-      <p
-        class="mdl-color-text--primary"></p>
+      <p *ngIf="(auth$|async).hasError"
+        class="mdl-color-text--primary">{{(auth$
+        |async).errMsg}}</p>
       <mdl-spinner
-        [active]="processingLogin"></mdl-spinner>
+        [active]="loading"></mdl-spinner>
     </div>
     <div class="mdl-dialog__actions">
       <button type="button" mdl-button
