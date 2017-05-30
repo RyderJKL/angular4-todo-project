@@ -1,3 +1,8 @@
-<p>
-  todo-header works!
-</p>
+<div>
+  <input type="text" [placeholder]="placeholder"
+         autofocus
+         [(ngModel)]="inputValue"
+         (keyup.enter)="enterUp()"
+         class="new-todo">
+  <!--ngModel记得导入FormsModule-->
+</div>

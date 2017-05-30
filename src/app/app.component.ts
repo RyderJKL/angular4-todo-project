@@ -11,7 +11,17 @@ import {Observable} from 'rxjs/Observable'
 
 import {LOGOUT} from './actions/auth.action'
 
+/*
+ * 命令别名: ng g c some -it -is 代表: ng generator
+ * component some --inline-template --inline-style
+ *
+ * */
+
+/*
+* @ 符号定义一个对象，表示后面的数据是一个元数据
+* */
 @Component({
+  // @Component 代表组件的装饰器
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']

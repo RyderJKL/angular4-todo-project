@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 
 import {ActivatedRoute} from '@angular/router'
 
-
-
 import {AppState, Todo} from '../domain/state'
 import {Store} from '@ngrx/store'
 
@@ -48,11 +46,13 @@ export class TodoComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-
+  ngOnInit(){
+    console.log(this.todos)
   }
 
   addTodo(desc: string) {
+    console.log(desc)
+    console.log(this.todos)
     this.service.addTodo(desc);
   }
 
