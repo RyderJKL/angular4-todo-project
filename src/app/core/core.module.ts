@@ -10,7 +10,7 @@ import { authReducer } from '../reducer/auth.reducer'
 import {todoReducer,todoFilterReducer} from '../reducer/todo.reducer'
 import {AuthService} from './auth.service'
 import {UserService} from './user.service'
-// import {AuthGuardService} from './auth-guard.service'
+import {AuthGuardService} from './auth-guard.service'
 
 import {StoreDevtoolsModule} from '@ngrx/store-devtools'
 
@@ -27,10 +27,16 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools'
   providers: [
     AuthService,
     UserService,
-    // AuthGuardService
+    AuthGuardService
   ]
 })
 export class CoreModule {
+  // 关于 CoreModule ，我们只希望其在应用启动时导入它一次，而不会在其他地方再次导入。
+  /*
+  CoreModule 中的适用场景:
+  * (1) 一些单例的模块，比如 UserService，这样的服务在整个系统中的各个地方都需要，但我们不希望它被创建多次。
+  * (2) 只应用于 AppComponent 模板的一次性组件，没有必要共享它们，但如果把它们留在根目录，又会显定太乱了。
+  */
   constructor(@Optional() @SkipSelf() parentModule: CoreModule){
     if (parentModule) {
       throw new Error (
