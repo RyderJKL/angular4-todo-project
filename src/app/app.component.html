@@ -28,7 +28,9 @@
       Todos
     </mdl-layout-title>
     <nav class="mdl-navigation">
-      <a class="mdl-navigation__link">link
+      <a class="mdl-navigation__link"
+         *ngIf="!(auth$|async).hasError"
+         routerLink="playground">playGround
       </a>
     </nav>
   </mdl-layout-drawer>
