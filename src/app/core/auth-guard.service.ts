@@ -37,7 +37,7 @@ export class AuthGuardService implements CanActivate, CanLoad{
   ): Observable<boolean> {
       // let url = `/${route.path}`;
       return this.store$.select(appState => appState.auth)
-    .map(auth => auth.hasError)
+    .map(auth => !auth.hasError)
   }
 
 

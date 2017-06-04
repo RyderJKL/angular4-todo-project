@@ -16,12 +16,15 @@ const routes: Routes = [
   {
     path: 'todo',
     redirectTo: 'todo/ALL',
-    canLoad: [AuthGuardService]
+    // canLoad: [AuthGuardService]
+    // 当没有登录的时候，
   },
   {
     path: 'playground',
-    canLoad: [AuthGuardService],
-    loadChildren: 'app/playground/playground.module#PlaygroundModule'
+    canActivate: [AuthGuardService],
+    // canLoad: [AuthGuardService],canLoad
+    // canLoad 决定是否加载某个 url 对应的模块
+    loadChildren: 'app/playground/playground.module#PlaygroundModule',
     // 路由器用 loadChildren
     // 属性链映射惰性加载的模块文件，playgroundModule，该表达式的规则是:模块路径 # 模块名称
   }

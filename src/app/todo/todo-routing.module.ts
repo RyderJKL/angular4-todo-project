@@ -12,7 +12,7 @@ const routes: Routes = [
     path: 'todo/:filter',
     component: TodoComponent,
     canActivate: [AuthGuardService]
-    // 使用路由守卫，显示用户未登录前不能访问 todo
+    // 使用路由守卫，显示用户未登录前不能访问 todo,并且返回原来的路径
   }
 ]
 
