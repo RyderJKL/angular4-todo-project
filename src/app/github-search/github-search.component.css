@@ -1,0 +1,41 @@
+.github-box {
+  width:100%;
+  border: 1px solid red;
+  height: 500px;
+  position: relative;
+  padding: 20px;
+}
+
+.search-box {
+  width: 100%;
+  margin: 10px 0;
+}
+.search-text {
+  width: 50%;
+  min-width: 400px;
+}
+
+.repo-container {
+
+}
+
+.repo{
+  width: 50%;
+  min-width: 400px;
+  margin: 10px 0;
+}
+
+
+.repo div > img {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+
+
+/*.move-demo:hover {*/
+  /*box-shadow: 2px -2px 2px 2px green;*/
+  /*border-radius:50%;*/
+/*}*/

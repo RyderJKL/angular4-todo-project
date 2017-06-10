@@ -24,7 +24,7 @@ export class TodoHeaderComponent implements OnInit {
     private elementRef: ElementRef
   ) {
 
-    const event$ = Observable.fromEvent(elementRef.nativeElement, 'input')
+    const event$ = Observable.fromEvent(elementRef.nativeElement,'input')
     .map(() => this.inputValue)
     .filter(input => input.trim().length > 0)
     .debounceTime(this.delay)

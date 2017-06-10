@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnInit} from '@angular/core';
 import { Router} from '@angular/router'
 
 import {MdlDialogService} from '@angular-mdl/core'
@@ -8,7 +8,9 @@ import {RegisterDialogComponent} from './sign/register-dialog/register-dialog.co
 import {Store} from '@ngrx/store'
 import {AppState,Auth} from './domain/state'
 import {Observable} from 'rxjs/Observable'
-
+import {Subscription} from 'rxjs/Rx'
+import 'rxjs/add/operator/timeInterval'
+import 'rxjs/add/observable/timer'
 import {LOGOUT} from './actions/auth.action'
 
 /*
@@ -26,10 +28,10 @@ import {LOGOUT} from './actions/auth.action'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'app works!';
   auth$: Observable<Auth>;
-
+  subscription: Subscription;
   constructor(
     private dialog: MdlDialogService,
     private router: Router,
@@ -59,8 +61,31 @@ export class AppComponent {
     })
   }
 
+
+
+  ngOnInit(){
+    // 创建被观察者
+    let observable$ = Observable.create((observe) => {
+      observe.next('Jack')
+      observe.next('mark')
+      observe.complete();
+      observe.next('haha')
+    })
+
+    // 创建观察者
+    let observe = {
+      next: (value) => console.log(value),
+      error: (error) => console.log(error),
+      complete: () => console.log('done')
+    }
+    observable$.subscribe(observe)
+
+  }
+
   logout() {
     this.store$.dispatch({type:LOGOUT})
     this.router.navigate(['/'])
   }
+
+
 }

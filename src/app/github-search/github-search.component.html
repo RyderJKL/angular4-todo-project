@@ -1,0 +1,18 @@
+<section class="github-box">
+
+  <div class="search-box">
+    <mdl-textfield type="text" class="search-text" [(ngModel)]="searchText" label="search in github" floating-label></mdl-textfield>
+  </div>
+
+
+  <div *ngIf="!!repos" class="repo-container">
+    <div class="repo" *ngFor="let repo of repos.items;let i = index;trackBy:trackByFn;">
+      <div class="">
+        <img [src]="repo.owner.avatar_url" alt="">
+        <span class="repo-name">{{repo.name}}</span>
+        <span class="repo-full-name">{{repo.full_name}}</span>
+      </div>
+      <p class="repo-desc">{{repo.description}}</p>
+    </div>
+  </div>
+</section>

@@ -20,9 +20,11 @@ import { ReactiveFormsModule} from '@angular/forms'
 import {AppRoutingModule} from './app-routing.module'
 import { AppComponent } from './app.component';
 import {TodoModule} from './todo/todo.module'
+import {RxjsPlaygroundModule} from './rxjs-playground/rxjs-playground.module'
+import {GithubSearchModule} from './github-search/github-search.module'
 import {LoginDialogComponent} from "./sign/login-dialog/login-dialog.component";
 import {RegisterDialogComponent} from "./sign/register-dialog/register-dialog.component";
-
+// import {GithubSearchModule} from './github-search/github-search.module'
 @NgModule({
   /*
   * @NgModule 为模块定义元数据其中:
@@ -46,7 +48,7 @@ import {RegisterDialogComponent} from "./sign/register-dialog/register-dialog.co
   declarations: [
     AppComponent,
     LoginDialogComponent,
-    RegisterDialogComponent
+    RegisterDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,9 @@ import {RegisterDialogComponent} from "./sign/register-dialog/register-dialog.co
     CoreModule,
     ShareModule,
     TodoModule,
-    AppRoutingModule
+    RxjsPlaygroundModule,
+    GithubSearchModule,
+    AppRoutingModule,
   ],
   entryComponents: [LoginDialogComponent,RegisterDialogComponent],
   providers: [],

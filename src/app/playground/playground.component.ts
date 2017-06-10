@@ -1,10 +1,6 @@
 import { Component, OnInit,AfterViewInit,Inject,AfterContentInit,ElementRef,ViewChild} from '@angular/core';
 import {Observable} from "rxjs/Observable";
-import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/scan'
-import 'rxjs/add/operator/filter'
-import 'rxjs/add/operator/throttleTime'
-
+import {Subscription} from 'rxjs/Subscription'
 
 @Component({
   selector: 'app-playground',
@@ -15,6 +11,8 @@ export class PlaygroundComponent implements OnInit {
 
   // @ViewChild('myname') input;
 
+  private subscription:Subscription;
+
   constructor(
     private el: ElementRef,
   ) {
@@ -23,15 +21,8 @@ export class PlaygroundComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    let input$ = Observable.fromEvent<KeyboardEvent>(this.el.nativeElement.querySelector('#play-jack'),'input')
-      .map((e:any) => e.target.value)
-      .filter(value => value.length >=1)
-      .throttleTime(100)
-      .distinctUntilChanged()
-    input$.subscribe(next =>
-      console.log(next),
-        error => console.log(error)
-    )
+
+
   }
 
   ngAfterContentInit(){
@@ -39,8 +30,16 @@ export class PlaygroundComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log()
+    let input$ = Observable.fromEvent<KeyboardEvent>(this.el.nativeElement.querySelector('#play-jack'),'input')
+      .map((e:any) => e.target.value)
+      .filter(value => value.length >=1)
+      .throttleTime(100)
+      .distinctUntilChanged()
 
+    this.subscription = input$.subscribe(next =>
+        console.log(next),
+      error => console.log(error)
+    )
 
   }
 
