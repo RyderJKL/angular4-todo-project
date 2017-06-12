@@ -61,24 +61,10 @@ export class AppComponent implements OnInit{
     })
   }
 
-
-
   ngOnInit(){
-    // 创建被观察者
-    let observable$ = Observable.create((observe) => {
-      observe.next('Jack')
-      observe.next('mark')
-      observe.complete();
-      observe.next('haha')
-    })
 
-    // 创建观察者
-    let observe = {
-      next: (value) => console.log(value),
-      error: (error) => console.log(error),
-      complete: () => console.log('done')
-    }
-    observable$.subscribe(observe)
+
+
 
   }
 
@@ -86,6 +72,7 @@ export class AppComponent implements OnInit{
     this.store$.dispatch({type:LOGOUT})
     this.router.navigate(['/'])
   }
+
 
 
 }

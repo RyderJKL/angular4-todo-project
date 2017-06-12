@@ -9,12 +9,15 @@ import {DragDemoComponent} from './drag-demo/drag-demo.component'
 const routes: Routes = [
   {
     path: 'rxjs',
-    component: RxjsPlaygroundComponent
+    component: RxjsPlaygroundComponent,
+    children: [
+      {
+        path: 'drage',
+        component: DragDemoComponent
+      }
+    ]
   },
-  {
-    path: 'drage',
-    component: DragDemoComponent
-  }
+
 ]
 
 @NgModule({
