@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import {Observable} from 'rxjs/Observable'
-import {takeUntil} from "rxjs/operator/takeUntil";
+
 
 
 @Component({
@@ -16,5 +16,6 @@ export class RxjsPlaygroundComponent implements OnInit {
   ngOnInit() {
 
   }
+
 
 }

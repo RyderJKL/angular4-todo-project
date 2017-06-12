@@ -24,6 +24,7 @@ import {RxjsPlaygroundModule} from './rxjs-playground/rxjs-playground.module'
 import {GithubSearchModule} from './github-search/github-search.module'
 import {LoginDialogComponent} from "./sign/login-dialog/login-dialog.component";
 import {RegisterDialogComponent} from "./sign/register-dialog/register-dialog.component";
+import { AnimationBallComponent } from './animation-ball/animation-ball.component';
 // import {GithubSearchModule} from './github-search/github-search.module'
 @NgModule({
   /*
@@ -49,6 +50,7 @@ import {RegisterDialogComponent} from "./sign/register-dialog/register-dialog.co
     AppComponent,
     LoginDialogComponent,
     RegisterDialogComponent,
+    AnimationBallComponent,
   ],
   imports: [
     BrowserModule,

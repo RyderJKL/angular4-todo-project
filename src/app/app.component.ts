@@ -5,6 +5,7 @@ import {MdlDialogService} from '@angular-mdl/core'
 import {LoginDialogComponent} from './sign/login-dialog/login-dialog.component'
 import {RegisterDialogComponent} from './sign/register-dialog/register-dialog.component'
 
+import {AnimationBallComponent} from  './animation-ball/animation-ball.component'
 import {Store} from '@ngrx/store'
 import {AppState,Auth} from './domain/state'
 import {Observable} from 'rxjs/Observable'
@@ -62,7 +63,6 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(){
-
 
 
 
