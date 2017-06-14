@@ -11,8 +11,7 @@
     .github-box .search-box .search-text {
       width: 100%; }
     .github-box .search-box .suggest {
-      width: 100%;
-      border: 1px solid palevioletred; }
+      width: 100%; }
       .github-box .search-box .suggest li {
         width: 100%;
         line-height: 2em; }

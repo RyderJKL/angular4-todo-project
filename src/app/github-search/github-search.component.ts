@@ -38,18 +38,19 @@ export class GithubSearchComponent implements OnInit {
   }
 
   renderList(list):void{
+
     this.suggestList = list.items.map(item=>item.name).concat();
-    console.log(this.suggestList)
+
   }
 
   render(repo):void {
     this.repos = repo;
   }
     getSuggestList():void {
-    let searchInput = document.querySelector('#inputSearch');
-    let selectedItem = document.querySelector('#suggest');
 
-    let click$ = Observable.fromEvent<KeyboardEvent>(selectedItem,'click');
+    let searchInput = document.querySelector('#inputSearch');
+      let selectedItem = document.querySelector('#suggest1');
+      let click$ = Observable.fromEvent<KeyboardEvent>(selectedItem,'click');
 
       let input$ = Observable.fromEvent<KeyboardEvent>(searchInput,'keypress')
       // 为 fromEvent 指定 <KeyboardEvent> 范型
@@ -84,10 +85,14 @@ export class GithubSearchComponent implements OnInit {
        *
        * */
 
-    click$.filter((e:any)=>e.target.matches('li')).map((e:any)=>e.target.value)
-      // .subscribe(value=>console.log(value))
-      // .concatMap((e:any)=>this.getRepo(e.target.innerText))
-      // .subscribe(repo=>this.render(repo))
+
+    click$.filter((e:any)=>e.target.matches('li')).map((e:any)=>e)
+      .concatMap((e:any)=>this.getRepo(e.target.innerText))
+      .subscribe(repo=>{
+        // selectedItem.style.display = 'none';
+        this.render(repo)
+      }
+      )
 
       input$.subscribe(list=>this.renderList(list))
   }

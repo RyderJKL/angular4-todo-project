@@ -2,12 +2,12 @@
 
   <div class="search-box">
     <mdl-textfield type="text" id="inputSearch" class="search-text" [(ngModel)]="searchText" label="search in github" floating-label></mdl-textfield>
-    <ul class="suggest" id="suggest" *ngIf="!!suggestList">
+    <ul class="suggest" id="suggest1">
       <li *ngFor="let item of suggestList">{{item}}</li>
     </ul>
   </div>
 
-  <div *ngIf="!!repos>0" class="repo-container">
+  <div *ngIf="!!repos" class="repo-container">
     <div class="repo" *ngFor="let repo of repos.items;let i = index;trackBy:trackByFn;">
       <div class="">
         <img [src]="repo.owner.avatar_url" alt="">
