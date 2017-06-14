@@ -1,7 +1,10 @@
 <section class="github-box">
 
   <div class="search-box">
-    <mdl-textfield type="text" class="search-text" [(ngModel)]="searchText" label="search in github" floating-label></mdl-textfield>
+    <mdl-textfield type="text" id="inputSearch" class="search-text" [(ngModel)]="searchText" label="search in github" floating-label></mdl-textfield>
+    <ul class="suggest">
+      <li></li>
+    </ul>
   </div>
 
 

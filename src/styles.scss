@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+
+*{
+  margin: 0;
+  padding:0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html,body {
+  width: 100%;
+  height: 100vh;
+}
+
+body{
+  overflow: scroll;
+  position: relative;
+  /*background-color: #d6d6d6;*/
+}
+
+@import "~@angular-mdl/core/scss/_color-definitions";
+
+
+$color-primary: $palette-blue-500;
+$color-primary-dark: $palette-blue-700;
+$color-accent: $palette-deep_purple-A200;
+$color-primary-contrast: $color-dark-contrast;
+$color-accent-contrast: $color-dark-contrast;
+
+@import '~@angular-mdl/core/scss/material-design-lite';
+

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!--<meta name="viewport" content="width:device-width">-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="./eventUntil.js"></script>
+  <style>
+    * {
+      padding:0;
+      margin:0;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    html,body{
+      width: 100%;
+      height: 100%;
+    }
+    body{
+      position: relative;
+      border: 1px solid red;
+    }
+
+    .drag-demo {
+      width: 40px;
+      height: 40px;
+      background: red;
+      position: absolute;;
+      border:1px dashed darkorange;
+    }
+
+
+  </style>
+</head>
+<body>
+<div id="status"></div>
+<div class="drag-demo draggable">
+</div>
+<script type="text/javascript">
+  var body = document.querySelector('body')
+  var dragDemo = document.querySelector('.drag-demo')
+
+  function EventTarget() {
+    // EventTarget 其实就是发布者（主体），也可以理解为母体，因为是通用模式，她将构造出所有发布者
+
+    this.handlers = {}
+    // 存放订阅者的消息(回调函数)的缓存对象
+    // handlers 用于存储事件处理程序的缓存对象
+  }
+
+  EventTarget.prototype = {
+    constructor: EventTarget,
+    addHandler: function (type,handler/*接收两个参数:自定的事件类型和事件处理程序*/) {
+      if (typeof this.handlers[type] === 'undefined') {
+        // 初次判断，是否存在该类型的消息
+        this.handlers[type] = [];
+        // 为每一种事件类型建立一个事件类型数组
+      }
+      this.handlers[type].push(handler)
+      // 将订阅的消息存放进缓存列表
+      // 将对应的事件处理函数推入到事件类型数组中
+    },
+
+    fire:function (event) {
+      // 发布消息
+      console.log(this)
+      event.target || (event.target = this)
+      // 为自定义事件构造 event 对象
+      if (this.handlers[event.type] instanceof Array){
+        // 如何消息池中没有消息，就什么都不干
+        var handlers = this.handlers[event.type];
+        // 获取要发布的消息类型
+        for(var i = 0;i< handlers.length;i++){
+          handlers[i](event);
+          // 发布消息
+        }
+      }
+    },
+    removeHandler:function (type,handler) {
+      // 取消订阅
+      if(this.handlers[type] instanceof Array) {
+        var i = this.handlers[type].indexOf(handler)
+        if (i > -1) {
+          this.handlers[type].splice(i,1)
+        }
+
+      }
+    }
+  }
+
+
+  var DragDrop = function () {
+    // DragDrop 是一个单例对象
+    var dragdrop= new EventTarget();
+    // 创建一个被观察者，通过自定义事件来得到整个拖拽过程的状态。
+    // EventTarget 是一个通用的发布/订阅模式
+    var dragging = null;
+    // 判断是否处于拖拽状态
+    var diffX = 0;
+    var diffY = 0;
+
+
+    function handleEvent(event) {
+      // handleEvent 用于处理拖拽过程中的三个鼠标事件
+      event = EventUntil.getEvent(event);
+      var target = EventUntil.getTarget(event)
+
+      switch(event.type) {
+        case "mousedown":
+          if (target.className.indexOf('draggable') > -1) {
+            // 通过检查 target 中的 class 是否含 draggable 类判定对象是否可以拖动
+            dragging = target;
+            diffX = event.clientX  - target.getBoundingClientRect().left;
+            // diffX = event.clientX - target.offsetTop
+            diffY = event.clientY - target.getBoundingClientRect().top;
+            dragdrop.fire(
+              // 发布 dragstart 消息
+              {
+                type: "dragstart",
+                target: dragging,
+                x: event.clientX,
+                y:event.clientY
+              }
+            )
+          }
+          break;
+        case "mousemove": if (dragging !== null) {
+          // 当 dragging 不为空时候，更新目标元素位置
+          dragging.style.left = (event.clientX - diffX) + 'px';
+          dragging.style.top = (event.clientY - diffY) + 'px';
+          dragdrop.fire({
+            // 发布 drag 消息
+            type: "drag",
+            target: dragging,
+            x: event.clientX,
+            y: event.clientY
+          })
+
+        }
+          break;
+        case "mouseup":
+          dragdrop.fire({
+            // 发布 deaged 消息
+            type: "dragend",
+            target: dragging,
+            x: event.clientX,
+            y: event.clientY
+          })
+          dragging = null;
+          break;
+      }
+    };
+
+    // 公共接口
+    /*
+     * enabel 和 disable 提供了额外的对拖放功能的控制能力
+     * */
+    dragdrop.enable = function () {
+      EventUntil.addHandler(dragDemo,"mousedown",handleEvent);
+      EventUntil.addHandler(document,"mousemove",handleEvent);
+      EventUntil.addHandler(document,"mouseup",handleEvent)
+    };
+
+    dragdrop.disable = function () {
+      EventUntil.removeHandler(dragDemo,"mousedown",handleEvent)
+      EventUntil.removeHandler(document,"mousemove",handleEvent)
+      EventUntil.removeHandler(document,"mouseup",handleEvent)
+    }
+
+    return dragdrop;
+
+  }();
+
+
+  DragDrop.enable();
+  // 启动
+
+  DragDrop.addHandler('dragstart', function (event) {
+    // DragDrop 主体(被观察者)
+    // 在DragDrop上注册(监听) dragstart，当该方法被出发时，执行 function
+    //do something
+    var status = document.getElementById("status");
+    status.innerHTML = "Started dragging " + event.target.id;
+  })
+  DragDrop.addHandler('drag', function (event) {
+    // 注册(监听) drag 方法
+    //do something
+    var status = document.getElementById("status");
+    status.innerHTML += "<br>Dragged " + event.target.id + " to (" + event.x + "," + event.y + ")";
+  })
+
+  DragDrop.addHandler('dragend', function (event) {
+    // 注册(监听) dragend 方法
+    //do something
+    var status = document.getElementById("status");
+    status.innerHTML += "<br>Dropped " + event.target.id + " at (" + event.x + "," + event.y + ")";
+  })
+</script>
+</body>
+</html>

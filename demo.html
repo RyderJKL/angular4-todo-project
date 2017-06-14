@@ -5,7 +5,7 @@
     <title>Title</title>
   <!--<meta name="viewport" content="width:device-width">-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script type="text/javascript" src="./eventUntil.js"></script>
+  <!--<script type="text/javascript" src="./eventUntil.js"></script>-->
   <style>
     * {
       padding:0;
@@ -44,11 +44,35 @@
 <div class="drag-demo draggable">
   dfs
 </div>
+<input type="button" id="input1" value="button">
 <script type="text/javascript">
-    demo = document.querySelector('.drag-demo')
-    demo.onclick = function (event) {
-      console.log(event.target.getBoundingClientRect())
+
+  let btn = document.querySelector('#input1');
+  let i = 1;
+  setInterval(function () {
+    console.log('第'+500*i+'毫秒')
+    i++
+  },500)
+
+  let count = 0
+  btn.onclick = function () {
+    throttle(cli,btn,1000)
+  }
+
+  function cli() {
+    console.log(count++)
+  }
+  function throttle(fn,context,delay) {
+      let now = new Date().getTime();
+
+    if(fn.last && now < delay + fn.last) {
+      clearTimeout(fn.timerId);
+      fn.timerId = setTimeout(()=>{ fn.last = now;fn.apply(context)},delay);
+    } else {
+        fn.last = now;
+        fn.apply(context)
     }
+  }
 </script>
 </body>
 </html>
