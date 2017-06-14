@@ -1,41 +1,33 @@
 .github-box {
-  width:100%;
+  width: 100%;
   border: 1px solid red;
   height: 500px;
   position: relative;
-  padding: 20px;
-}
+  padding: 20px; }
+  .github-box .search-box {
+    margin: 0 auto;
+    width: 50%;
+    min-width: 400px; }
+    .github-box .search-box .search-text {
+      width: 100%; }
+    .github-box .search-box .suggest {
+      width: 100%;
+      border: 1px solid palevioletred; }
+      .github-box .search-box .suggest li {
+        width: 100%;
+        line-height: 2em; }
+        .github-box .search-box .suggest li:hover {
+          cursor: pointer; }
+  .github-box .repo-container {
+    width: 50%;
+    margin: 0 auto; }
+    .github-box .repo-container .repo {
+      min-width: 400px;
+      margin: 10px 0; }
+    .github-box .repo-container .repo div > img {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%; }
 
-.search-box {
-  width: 100%;
-  margin: 10px 0;
-}
-.search-text {
-  width: 50%;
-  min-width: 400px;
-}
-
-.repo-container {
-
-}
-
-.repo{
-  width: 50%;
-  min-width: 400px;
-  margin: 10px 0;
-}
-
-
-.repo div > img {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
-
-
-/*.move-demo:hover {*/
-  /*box-shadow: 2px -2px 2px 2px green;*/
-  /*border-radius:50%;*/
-/*}*/
+/*# sourceMappingURL=github-search.component.css.map */

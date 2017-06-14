@@ -1,0 +1,54 @@
+.github-box {
+  width:100%;
+  border: 1px solid red;
+  height: 500px;
+  position: relative;
+  padding: 20px;
+
+  .search-box {
+    margin: 0 auto;
+    width: 50%;
+    min-width:400px;
+    .search-text {
+      width: 100%;
+    }
+
+    .suggest {
+      width: 100%;
+      border:1px solid palevioletred;
+      li {
+        width: 100%;
+        line-height: 2em;
+        &:hover {
+          cursor:pointer;
+        }
+      }
+    }
+  }
+
+  .repo-container {
+    width: 50%;
+    margin: 0 auto;
+    .repo{
+      min-width: 400px;
+      margin: 10px 0;
+    }
+
+
+    .repo div > img {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
+
+  }
+
+
+
+}
+
+
+
+
