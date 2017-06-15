@@ -24,6 +24,7 @@ export class DragDemoComponent implements OnInit {
 
 
     scroll$
+      .debounceTime(300)
       .map((e:any) => container1.getBoundingClientRect().bottom<0)
       .subscribe((bool)=> {
       if(bool) {
@@ -52,14 +53,18 @@ export class DragDemoComponent implements OnInit {
       // mousemove 要在 mouseup 之后立刻结束，使用 takeUntil
     ).concatAll(/*
     因为 observable(mouseDown) 发射出来的是 observable(mouseMove)，所以需要使用 concatAll 将所有的 mousemove Observable 转换为 mouse move 事件*/)
-      .withLatestFrom(mouseDown$,(move:any,down:any) => {
-        console.log(down.clietX)
-        console.log(down.target.getBoundingClientRect())
+      .withLatestFrom(
+        mouseDown$.map((e:any)=>({
+          rect: e.target.getBoundingClientRect(),
+          x: e.clientX,
+          y: e.clientY,
+          height: e.target.clientHeight,
+          width: e.target.clientWidth
+        })),
+        (move:any,down:any) => {
         return {
-          // x: move.clientX - (down.clientX - down.target.getBoundingClientRect().left),
-          // y: move.clientY - (down.clientY - down.target.getBoundingClientRect().top),
-          x: validateValue(move.clientX - down.offsetX,0,window.innerWidth-down.target.clientWidth),
-          y:validateValue(move.clientY - down.offsetY,0, window.innerHeight-down.target.clientHeight)
+          x: validateValue(move.clientX - (down.x-down.rect.left),0,window.innerWidth-down.width),
+          y:validateValue(move.clientY - (down.y-down.rect.top),0, window.innerHeight-down.height)
         }
       })
       .subscribe(pos => {
