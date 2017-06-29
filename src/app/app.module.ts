@@ -1,19 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /*
 * BrowserModule 提供运行在浏览器中的应用所需要的关键服务和指令
 * */
 
 /*
 * FormsModule 提供模板驱动表单和双向绑定等服务和指令
-* */
-
-
-import { NgModule } from '@angular/core';
-
-import { HttpModule } from '@angular/http';
+*
 /**
  *HttpModule 提供 http 请求和响应的服务
  */
+
+import { HttpModule } from '@angular/http';
+import { NgModule } from '@angular/core';
 import { CoreModule} from './core/core.module'
 import { ShareModule} from './share/share.module'
 import { ReactiveFormsModule} from '@angular/forms'
@@ -24,14 +23,19 @@ import {RxjsPlaygroundModule} from './rxjs-playground/rxjs-playground.module'
 import {GithubSearchModule} from './github-search/github-search.module'
 import {LoginDialogComponent} from "./sign/login-dialog/login-dialog.component";
 import {RegisterDialogComponent} from "./sign/register-dialog/register-dialog.component";
+
+import {LoginComponent} from './login/login.component'
+import {LoginByWechatComponent} from './login/login-by-wechat/login-by-wechat.component'
+import {LoginWxlogincallbackComponent} from './login/login-wxlogincallback/login-wxlogincallback.component'
+import {LoginService} from './login/login.service'
 import { AnimationBallComponent } from './animation-ball/animation-ball.component';
-// import {GithubSearchModule} from './github-search/github-search.module'
+
 @NgModule({
   /*
   * @NgModule 为模块定义元数据其中:
   *
   * declarations: 声明本模块中拥有的视图。Angular
-   * 中有三种视图:组件，视图，指令。记住在 module 中声明的声明的组件在
+   * 中有三种视图:组件，视图，指令。记住在 module 中声明的组件在
     * module 范围内全局可用。
   * */
 
@@ -50,21 +54,25 @@ import { AnimationBallComponent } from './animation-ball/animation-ball.componen
     AppComponent,
     LoginDialogComponent,
     RegisterDialogComponent,
+    LoginComponent,
+    LoginByWechatComponent,
+    LoginWxlogincallbackComponent,
     AnimationBallComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
-    HttpModule,
     CoreModule,
     ShareModule,
+    HttpModule,
     TodoModule,
     RxjsPlaygroundModule,
     GithubSearchModule,
     AppRoutingModule,
   ],
   entryComponents: [LoginDialogComponent,RegisterDialogComponent],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

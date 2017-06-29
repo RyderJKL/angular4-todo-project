@@ -24,7 +24,7 @@ export class DragDemoComponent implements OnInit {
 
 
     scroll$
-      .debounceTime(300)
+      .throttleTime(100)
       .map((e:any) => container1.getBoundingClientRect().bottom<0)
       .subscribe((bool)=> {
       if(bool) {

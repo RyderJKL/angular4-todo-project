@@ -1,8 +1,15 @@
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `.angular-cli.json`.
-
 export const environment = {
-  production: false
-};
+  production: false,
+  PROJECT_NAME: "https://dev.alphalawyer.cn/ilaw/",
+  // WX_LOGIN_BACK: "https://dev.alphalawyer.cn/ilaw//v2/weixinlogin/weixinLoginCallBackNew",
+  WX_LOGIN_BACK:"https://alphalawyer.cn/wxloginpro"
+}
+// export const environment = {
+//   production: false,
+//   PROJECT_NAME: "https://alphalawyer.cn/ilawdev/",
+//   DOWNLOAD_URL: "https://alphalawyer.cn/ilawdev/",
+//   WORD_PROJECT_NAME: "https://intell.alphalawyer.cn/word/",
+//   WX_LOGIN_BACK: "https://alphalawyer.cn/officedev/#/main/collection",
+//   JDBG_DOWNLOAD_URL: "https://hd.alphalawyer.cn/headline/"
+//
+// };

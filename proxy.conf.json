@@ -1,0 +1,12 @@
+{
+  "/project":{
+    "target": "https://dev.alphalawyer.cn",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/todo":{
+    "target":"http://localhost:3000",
+    "secure": false,
+    "changeOrigin":true
+  }
+}

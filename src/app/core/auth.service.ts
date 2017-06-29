@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   loginWithCredentials(username:string,password:string) {
-    this.userService.findUser(username)
+    return this.userService.findUser(username)
       .subscribe(user => {
       if(null === user) {
         this.store$.dispatch({type: LOGIN_FAILED_NOT_EXISTED});
@@ -68,7 +68,7 @@ export class AuthService {
       password: password,
     };
 
-    this.userService.findUser(username)
+    return this.userService.findUser(username)
     .subscribe(user => {
       if(user !== null) {
         this.store$.dispatch({type: REGISTER_FAILED_EXISTED})

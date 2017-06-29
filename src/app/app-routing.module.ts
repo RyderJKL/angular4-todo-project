@@ -4,14 +4,29 @@
 import { NgModule} from '@angular/core'
 import {Routes, RouterModule} from '@angular/router'
 import {AuthGuardService} from './core/auth-guard.service'
+
+import {LoginComponent} from './login/login.component'
+import {LoginByWechatComponent} from './login/login-by-wechat/login-by-wechat.component'
+import {LoginWxlogincallbackComponent} from './login/login-wxlogincallback/login-wxlogincallback.component'
 // 路由模块，首先在 index.html 中引入基路径 <base href="/">
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-    // pathMatch 路由的字符匹配策略,
-    // 子路由数组
+    path: 'login',
+    children: [
+      {
+        path: '',
+        component: LoginComponent,
+      },
+
+      {
+        path:'wechat',
+        component: LoginByWechatComponent
+      },
+      {
+        path: 'wechatcallback/:code/:state',
+        component: LoginWxlogincallbackComponent
+      }
+    ]
   },
   {
     path: 'todo',
@@ -21,7 +36,7 @@ const routes: Routes = [
   },
   {
     path: 'playground',
-    canActivate: [AuthGuardService],
+    // canActivate: [AuthGuardService],
     // canLoad: [AuthGuardService],canLoad
     // canLoad 决定是否加载某个 url 对应的模块
     loadChildren: 'app/playground/playground.module#PlaygroundModule',

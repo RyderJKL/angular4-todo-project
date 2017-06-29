@@ -29,7 +29,6 @@
     .drag-demo {
       width: 400px;
       height: 400px;
-      padding: 100px;
       background-clip: content-box;
       background-color: lightpink;
       margin: auto;
@@ -41,38 +40,56 @@
 </head>
 <body>
 <div id="status"></div>
-<div class="drag-demo draggable">
-  dfs
+<div class="drag-demo draggable" id="demo">
+  <span></span>
 </div>
 <input type="button" id="input1" value="button">
 <script type="text/javascript">
 
-  let btn = document.querySelector('#input1');
-  let i = 1;
-  setInterval(function () {
-    console.log('第'+500*i+'毫秒')
-    i++
-  },500)
+  let btn = document.querySelector('#demo');
+  let span = btn.firstElementChild;
+  let i = 0;
 
-  let count = 0
-  btn.onclick = function () {
-    throttle(cli,btn,1000)
+  btn.onmousemove = throttle(getUserAction,1000)
+
+  function getUserAction(e) {
+    span.innerHTML = i++;
+    console.log(e)
   }
 
-  function cli() {
-    console.log(count++)
+  function throttle(fn,wait) {
+      let last=0;
+      return function () {
+        let now = +new Date();
+        let context = this;
+        let args  = arguments;
+        if (last + wait < now) {
+            fn.apply(context,args);
+            last = now;
+        }
+      }
   }
-  function throttle(fn,context,delay) {
-      let now = new Date().getTime();
 
-    if(fn.last && now < delay + fn.last) {
-      clearTimeout(fn.timerId);
-      fn.timerId = setTimeout(()=>{ fn.last = now;fn.apply(context)},delay);
-    } else {
-        fn.last = now;
-        fn.apply(context)
+function throttle(fn,wait) {
+
+    let timeout ;
+
+    return function () {
+      let context = this;
+      let args = arguments;
+      if(!timeout) {
+        timeout = setTimeout(function () {
+          timeout = null;
+          fn.apply(context,args);
+        },wait)
+      }
+
     }
-  }
+}
+
+let str = "   asdjfjs  "
+  console.log(str)
+  console.log(str.replace(/^\s*|\s*$/g,""))
 </script>
 </body>
 </html>
