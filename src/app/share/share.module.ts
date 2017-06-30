@@ -10,17 +10,17 @@ import { CommonModule } from '@angular/common'
 * */
 import {FormsModule} from '@angular/forms'
 import { MdlModule} from '@angular-mdl/core'
-
+// import {SuiModule} from 'ng2-semantic-ui'
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    MdlModule
+    MdlModule,
   ],
   exports: [
     CommonModule,
     FormsModule,
-    MdlModule
+    MdlModule,
   ],
   declarations: []
 })

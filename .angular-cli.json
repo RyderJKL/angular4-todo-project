@@ -21,6 +21,7 @@
       "styles": [
         "assets/material.min.css",
         "assets/fonts-bass/icon-bass.css",
+        "/assets/indigo-pink.css",
         "styles.scss"
       ],
       "scripts": [],
