@@ -1,0 +1,8 @@
+https://dev.alphalawyer.cn/ilaw//v2/weixinlogin/getAppIdNew
+https://alphalawyer.cn/wechatlogin/dev.alphalawyer.cn/
+https://dev.alphalawyer.cn/
+https://dev.alphalawyer.cn/login/login.html
+
+https://dev.alphalawyer.cn/login/loginByWechat/loginByWechatCallback.html（欢迎界面）
+
+https://dev.alphalawyer.cn/ilaw//v2/weixinlogin/weixinLoginCallBackNew（返回的状态码）
