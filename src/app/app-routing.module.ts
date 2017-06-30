@@ -50,6 +50,10 @@ const routes: Routes = [
   {
     path: 'github',
     redirectTo: 'github'
+  },
+  {
+    path: 'register',
+    loadChildren: 'app/register/register.module#RegisterModule',
   }
 ];
 

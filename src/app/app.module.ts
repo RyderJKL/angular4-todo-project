@@ -28,6 +28,7 @@ import {LoginComponent} from './login/login.component'
 import {LoginByWechatComponent} from './login/login-by-wechat/login-by-wechat.component'
 import {LoginWxlogincallbackComponent} from './login/login-wxlogincallback/login-wxlogincallback.component'
 import {LoginService} from './login/login.service'
+import {RegisterModule} from './register/register.module'
 import { AnimationBallComponent } from './animation-ball/animation-ball.component';
 
 @NgModule({
@@ -70,6 +71,7 @@ import { AnimationBallComponent } from './animation-ball/animation-ball.componen
     RxjsPlaygroundModule,
     GithubSearchModule,
     AppRoutingModule,
+    RegisterModule
   ],
   entryComponents: [LoginDialogComponent,RegisterDialogComponent],
   providers: [LoginService],
