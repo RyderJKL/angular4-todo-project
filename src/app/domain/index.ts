@@ -14,7 +14,7 @@ export interface Address {
   province: string, // 省份
   city: string, // 城市
   area: string, // 区县
-  addr: string // 详细地址
+  street: string // 详细地址
 }
 
 
