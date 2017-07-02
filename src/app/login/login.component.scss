@@ -1,0 +1,28 @@
+.login-container {
+  border: none;
+
+  .form-box {
+    font-size: 1em;
+    width: 50%;
+    max-width: 750px;
+    margin: 0 auto;
+
+    form {
+      fieldset {
+        text-align: center;
+
+        legend {
+          font-size: 1.4em;
+          color: #dedede;
+        }
+      }
+
+      div {
+        display: block;
+        width: 300px;
+        max-width: 100%;
+      }
+
+    }
+}
+}

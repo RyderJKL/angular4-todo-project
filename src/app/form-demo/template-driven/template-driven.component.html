@@ -1,0 +1,92 @@
+<form novalidate #f="ngForm" (ngSubmit)="onSubmit(f, $event);f.reset()">
+  <label>
+    <span>电子邮件地址</span>
+    <input
+      type="text"
+      name="email"
+      placeholder="请输入您的 email 地址"
+      [ngModel]="user.email"
+      #email="ngModel"
+      required
+      pattern="([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+.[a-zA-Z]{2,4}">
+  </label>
+  <div *ngIf="email.errors?.required && email.touched" class="error">
+    email 是必填项
+  </div>
+  <div *ngIf="email.errors?.pattern && email.touched" class="error">
+    email 格式不正确
+  </div>
+  <div>
+    <label>
+      <span>密码</span>
+      <input
+        type="password"
+        name="password"
+        placeholder="请输入您的密码"
+        [(ngModel)]="user.password"
+        #password="ngModel"
+        required
+        minlength="8"
+        validateEqual="repeat"
+        reverse="true">
+    </label>
+    <div *ngIf="password.errors?.required && password.touched" class="error">
+      密码是必填项
+    </div>
+    <div *ngIf="password.errors?.minlength && password.touched" class="error">
+      密码需至少8位
+    </div>
+    <label>
+      <span>确认密码</span>
+      <input
+        type="password"
+        name="repeat"
+        placeholder="请再次输入密码"
+        [(ngModel)]="user.repeat"
+        #repeat="ngModel"
+        required
+        minlength="8"
+        validateEqual="password"
+        reverse="false">
+    </label>
+    <div *ngIf="repeat.errors?.required && repeat.touched" class="error">
+      确认密码是必填项
+    </div>
+    <div *ngIf="repeat.errors?.minlength && repeat.touched" class="error">
+      确认密码需至少8位
+    </div>
+    <div *ngIf="repeat.errors?.validateEqual && repeat.touched" class="error">
+      确认密码不匹配
+    </div>
+  </div>
+  <div ngModelGroup="address">
+    <!--为了实现表单中的结构和领域对象的结构一致，使用 ngModeGroup,会创建并绑定一个 FormGroup 到该 DOM 元素,而 FormGroup 将会包含一组 FormControl。-->
+    <label>
+      <span>省份</span>
+      <select name="province" (change)="onProvinceChange()" [(ngModel)]="user.address.province">
+        <option value="">请选择省份</option>
+        <option [value]="province" *ngFor="let province of provinces">{{province}}</option>
+      </select>
+    </label>
+    <label>
+      <span>城市</span>
+      <select name="city" (change)="onCityChange()" [(ngModel)]="user.address.city">
+        <option value="">请选择城市</option>
+        <option [value]="city" *ngFor="let city of cities">{{city}}</option>
+      </select>
+    </label>
+    <label>
+      <span>区县</span>
+      <select name="area" [(ngModel)]="user.address.area">
+        <option value="">请选择区县</option>
+        <option [value]="area" *ngFor="let area of areas">{{area}}</option>
+      </select>
+    </label>
+    <label>
+
+      <span>地址</span>
+      <input type="text" name="street" [(ngModel)]="user.address.street">
+    </label>
+  </div>
+  <button type="submit" [disabled]="f.invalid">注册</button>
+</form>

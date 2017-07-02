@@ -6,30 +6,32 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /*
 * FormsModule 提供模板驱动表单和双向绑定等服务和指令
-*
-/**
- *HttpModule 提供 http 请求和响应的服务
- */
+*/
+
 
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { CoreModule} from './core/core.module'
 import { ShareModule} from './share/share.module'
-import { ReactiveFormsModule} from '@angular/forms'
+
 import {AppRoutingModule} from './app-routing.module'
+
 import { AppComponent } from './app.component';
 import {TodoModule} from './todo/todo.module'
 import {RxjsPlaygroundModule} from './rxjs-playground/rxjs-playground.module'
 import {GithubSearchModule} from './github-search/github-search.module'
+import {FormDemoModule} from './form-demo/form-demo.module'
+
 import {LoginDialogComponent} from "./sign/login-dialog/login-dialog.component";
 import {RegisterDialogComponent} from "./sign/register-dialog/register-dialog.component";
-
 import {LoginComponent} from './login/login.component'
 import {LoginByWechatComponent} from './login/login-by-wechat/login-by-wechat.component'
 import {LoginWxlogincallbackComponent} from './login/login-wxlogincallback/login-wxlogincallback.component'
-import {LoginService} from './login/login.service'
-import {RegisterModule} from './register/register.module'
 import { AnimationBallComponent } from './animation-ball/animation-ball.component';
+
+import {LoginService} from './login/login.service'
+
+
 
 @NgModule({
   /*
@@ -51,7 +53,11 @@ import { AnimationBallComponent } from './animation-ball/animation-ball.componen
   /*
   * bootstrap：指定应用的主视图（根组件），只有根模块才能设置 bootstrap
   * */
-  declarations: [
+
+
+  /*如果组件、指令或管道出现在模块的imports数组中，不要把它声明在declarations数组中。 如果它是你自己写的，并且属于当前模块，就要把它声明在declarations数组中。
+  */
+declarations: [
     AppComponent,
     LoginDialogComponent,
     RegisterDialogComponent,
@@ -63,15 +69,14 @@ import { AnimationBallComponent } from './animation-ball/animation-ball.componen
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule,
     CoreModule,
     ShareModule,
     HttpModule,
     TodoModule,
     RxjsPlaygroundModule,
     GithubSearchModule,
+    FormDemoModule,
     AppRoutingModule,
-    RegisterModule
   ],
   entryComponents: [LoginDialogComponent,RegisterDialogComponent],
   providers: [LoginService],

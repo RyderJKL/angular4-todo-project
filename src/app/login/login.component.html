@@ -1,0 +1,33 @@
+<div class="login-container">
+  <div class="form-box">
+  <form name="loginForm" novalidate autocomplete="off">
+    <fieldset>
+      <legend>登录</legend>
+      <p>
+        <mdl-textfield label="登录名" type="text" [(ngModel)]="username" autocomplete="false" name="username" floating-label></mdl-textfield>
+      </p>
+      <p>
+        <mdl-textfield name="password" label="密码" type="password" [(ngModel)]="password" floating-label></mdl-textfield>
+      </p>
+      <div class="status-bar">
+        <mdl-spinner [active]="loading"></mdl-spinner>
+        <p>
+          <span></span>
+        </p>
+      </div>
+      <div>
+        <button mdl-button mdl-button-type="raised"
+                mdl-colored="primary" mdl-ripple class="btn-login-pwd"
+        (click)="passwordLogin()">
+          <span>进入应用</span>
+        </button>
+        <button mdl-button mdl-button-type="raised"
+                mdl-colored="primary" mdl-ripple class="btn-login-wechat" (click)="wechatLogin()">
+          <span>微信扫码登录</span>
+        </button>
+      </div>
+    </fieldset>
+  </form>
+
+  </div>
+</div>

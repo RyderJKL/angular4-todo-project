@@ -52,8 +52,8 @@ const routes: Routes = [
     redirectTo: 'github'
   },
   {
-    path: 'register',
-    loadChildren: 'app/register/register.module#RegisterModule',
+    path: 'form-demo',
+    loadChildren: 'app/form-demo/form-demo.module#FormDemoModule',
   }
 ];
 

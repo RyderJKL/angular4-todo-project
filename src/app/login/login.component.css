@@ -1,0 +1,18 @@
+.login-container {
+  border: none; }
+  .login-container .form-box {
+    font-size: 1em;
+    width: 50%;
+    max-width: 750px;
+    margin: 0 auto; }
+    .login-container .form-box form fieldset {
+      text-align: center; }
+      .login-container .form-box form fieldset legend {
+        font-size: 1.4em;
+        color: #dedede; }
+    .login-container .form-box form div {
+      display: block;
+      width: 300px;
+      max-width: 100%; }
+
+/*# sourceMappingURL=login.component.css.map */
